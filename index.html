@@ -1,0 +1,1057 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Incog is a software company in Egypt building custom ordering, booking, dashboard and internal systems for businesses.">
+<title>Incog Studio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: floating pill nav; hero = live dot field + giant wordmark whose visor eye follows you; work = project switcher + live demos; services = expanding index; process = line that fills on scroll; contact = message builder. Single dark look by choice (Incog brand). */
+:root{
+  --midnight:#0A1024;
+  --midnight-2:#0D1530;
+  --navy:#12204A;
+  --navy-2:#1A2B5E;
+  --line:#1E2C57;
+  --signal:#3D6BFF;
+  --signal-hi:#5A82FF;
+  --signal-soft:#8FA7FF;
+  --mist:#C7D2EA;
+  --mist-dim:#93A0C2;
+  --white:#FFFFFF;
+  --ok:#3FCB8E;
+  --warn:#F2B544;
+  --f-display:'Space Grotesk','IBM Plex Sans Arabic','Segoe UI',system-ui,sans-serif;
+  --f-mono:'JetBrains Mono',ui-monospace,Menlo,'IBM Plex Sans Arabic',monospace;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  color-scheme:dark;
+}
+html[lang="ar"]{--f-display:'IBM Plex Sans Arabic','Space Grotesk','Segoe UI',Tahoma,sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--midnight);color:var(--white);font-family:var(--f-display);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--midnight)}
+a{color:var(--signal-soft)}
+a:hover{color:var(--white)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--signal-soft);outline-offset:3px;border-radius:8px}
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.label{font-family:var(--f-mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal-soft);display:inline-flex;align-items:center;gap:10px}
+.label::before{content:"";width:22px;height:6px;border-radius:3px;background:var(--signal)}
+h1,h2,h3{text-wrap:balance;margin:0;letter-spacing:-.03em;line-height:1.04}
+html[lang="ar"] h1,html[lang="ar"] h2,html[lang="ar"] h3{letter-spacing:0;line-height:1.25}
+.visor circle{fill:none;stroke:var(--white);stroke-width:15}
+.visor rect{fill:var(--signal)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- nav ---------- */
+.navbar{position:fixed;z-index:20;top:calc(env(safe-area-inset-top,0px) + 14px);left:50%;transform:translateX(-50%);width:min(calc(100% - 24px),760px)}
+.nav{display:flex;align-items:center;gap:6px;padding:6px 6px 6px 16px;background:color-mix(in srgb,var(--navy) 72%,transparent);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);border:1px solid color-mix(in srgb,var(--signal-soft) 18%,transparent);border-radius:999px;box-shadow:0 10px 40px -12px rgba(0,0,0,.6)}
+html[dir="rtl"] .nav{padding:6px 16px 6px 6px}
+.logo{display:flex;align-items:baseline;font:700 24px 'Space Grotesk',sans-serif;letter-spacing:-.05em;color:var(--white);text-decoration:none;line-height:1;margin-right:auto;direction:ltr}
+html[dir="rtl"] .logo{margin-right:0;margin-left:auto}
+.logo svg{width:14px;height:14px;margin:0 1px;color:var(--white)}
+.feats svg{color:var(--white)}
+.links{position:relative;display:flex;gap:2px;list-style:none;margin:0;padding:0}
+.links a{position:relative;z-index:1;display:block;padding:9px 14px;border-radius:999px;font-size:15px;color:var(--mist);text-decoration:none;transition:color .25s}
+.links a[aria-current="true"],.links a:hover{color:var(--white)}
+.pill{position:absolute;top:0;left:0;height:100%;border-radius:999px;background:var(--navy-2);transition:transform .45s var(--ease),width .45s var(--ease),opacity .3s;opacity:0}
+.lang{display:flex;background:var(--midnight);border-radius:999px;padding:3px;gap:2px}
+.lang button{border:0;background:transparent;border-radius:999px;min-width:38px;min-height:34px;font:500 13px var(--f-mono);color:var(--mist-dim);cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--signal);color:var(--white)}
+@media (max-width:640px){.links .navopt{display:none}.links a{padding:9px 10px;font-size:14px}.nav{padding-inline-start:12px}}
+@media (max-width:380px){.links a{padding:9px 7px}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:min(820px,100svh);display:flex;align-items:flex-end;padding-block:120px 56px;overflow:hidden;isolation:isolate}
+#field{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
+.hero::after{content:"";position:absolute;inset:auto 0 0;height:40%;background:linear-gradient(to top,var(--midnight),transparent);z-index:-1;pointer-events:none}
+.hero-inner{display:grid;gap:28px;width:100%}
+.status{display:inline-flex;align-items:center;gap:10px;font:500 13px var(--f-mono);letter-spacing:.08em;color:var(--mist);padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:color-mix(in srgb,var(--midnight) 70%,transparent);width:max-content;max-width:100%}
+.pulse{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 color-mix(in srgb,var(--ok) 70%,transparent);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.mark{display:flex;align-items:baseline;font:700 clamp(96px,21vw,300px) 'Space Grotesk',sans-serif;letter-spacing:-.065em;line-height:.82;direction:ltr;user-select:none;padding-bottom:.22em}
+.mark .eye{width:.53em;height:.53em;margin:0 .015em;overflow:visible}
+html[dir="rtl"] .mark{justify-content:flex-end}
+.mark .slit{transition:transform .25s var(--ease)}
+.mark .ring{transform-origin:50% 50%}
+.mark span{display:inline-block;animation:rise 1s var(--ease) both}
+.mark span:last-child{animation-delay:.12s}
+.mark .eye{animation:rise 1s var(--ease) .06s both}
+@keyframes rise{from{transform:translateY(40%);opacity:0}}
+.hero-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:end}
+.headline{font-size:clamp(34px,4.6vw,58px);font-weight:500;letter-spacing:-.03em;line-height:1.05;margin:0}
+html[lang="ar"] .headline{letter-spacing:0;line-height:1.3;font-weight:600}
+.headline .alt{display:block;color:var(--mist-dim);font-size:.55em;margin-top:10px;font-weight:500;text-align:left}
+html[dir="rtl"] .headline .alt{text-align:right}
+.intro{color:var(--mist);font-size:19px;margin:0;max-width:34em}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.btn{position:relative;display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 24px;border-radius:999px;font-weight:500;font-size:16px;text-decoration:none;border:1px solid var(--line);color:var(--white);background:color-mix(in srgb,var(--midnight) 60%,transparent);cursor:pointer;transition:background .25s,border-color .25s,transform .25s var(--ease)}
+.btn:hover{border-color:var(--signal-soft);color:var(--white)}
+.btn.primary{background:var(--signal);border-color:var(--signal)}
+.btn.primary:hover{background:var(--signal-hi)}
+.btn .arr{transition:transform .3s var(--ease)}
+.btn:hover .arr{transform:translateX(4px)}
+html[dir="rtl"] .btn .arr{transform:scaleX(-1)}
+html[dir="rtl"] .btn:hover .arr{transform:scaleX(-1) translateX(4px)}
+@media (max-width:820px){.hero-row{grid-template-columns:1fr;gap:20px}.hero{padding-block:110px 40px;min-height:auto}}
+
+/* ---------- marquee ---------- */
+.marquee{border-block:1px solid var(--line);overflow:hidden;background:var(--midnight-2);direction:ltr}
+.track{display:flex;width:max-content;animation:marq 38s linear infinite}
+.marquee:hover .track{animation-play-state:paused}
+.track span{display:flex;align-items:center;gap:28px;padding:18px 14px;font-size:clamp(20px,2.6vw,30px);font-weight:500;letter-spacing:-.02em;white-space:nowrap;color:var(--mist)}
+.track span:nth-child(3n+2){color:var(--white)}
+.track .ar{font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:600}
+.track svg{width:.8em;height:.8em}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* ---------- sections ---------- */
+section{padding-block:104px;position:relative}
+.sec-head{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:32px;align-items:end;margin-bottom:48px}
+.sec-head h2{font-size:clamp(38px,5.4vw,68px);margin-top:16px}
+.sec-head p{margin:0;color:var(--mist);max-width:34em}
+@media (max-width:820px){.sec-head{grid-template-columns:1fr;gap:16px}section{padding-block:72px}}
+@supports (animation-timeline: view()){
+  @media (prefers-reduced-motion: no-preference){
+    .rv{animation:rv linear both;animation-timeline:view();animation-range:entry 0% entry 35%}
+    @keyframes rv{from{opacity:0;transform:translateY(36px)}}
+  }
+}
+
+/* ---------- work ---------- */
+.work{display:grid;grid-template-columns:300px minmax(0,1fr);gap:28px;align-items:start}
+.tabs{display:grid;gap:8px;position:sticky;top:96px}
+.tab{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;text-align:start;padding:18px;border-radius:18px;border:1px solid var(--line);background:transparent;cursor:pointer;transition:background .3s,border-color .3s,transform .3s var(--ease);text-decoration:none;color:var(--white)}
+.tab:hover{border-color:var(--navy-2);background:var(--midnight-2)}
+.tab[aria-selected="true"]{background:var(--navy);border-color:var(--signal)}
+.tab .ix{grid-row:span 2;font:500 13px var(--f-mono);color:var(--signal-soft);padding-top:5px}
+.tab .nm{font-size:20px;font-weight:700;letter-spacing:-.02em}
+.tab .ty{font-size:14px;color:var(--mist-dim)}
+.tab.next{border-style:dashed}
+.tab.next .nm{color:var(--mist)}
+.stage{min-width:0;display:grid}
+.panel{grid-area:1/1;display:grid;gap:22px;min-width:0}
+.panel[hidden]{display:none!important}
+.panel.enter{animation:pin .55s var(--ease) both}
+@keyframes pin{from{opacity:0;transform:translateY(18px) scale(.985)}}
+.p-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 20px;align-items:end}
+.p-head h3{font-size:clamp(30px,3.6vw,46px)}
+.chip{font:500 12px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border-radius:999px;border:1px solid var(--warn);color:var(--warn);white-space:nowrap}
+.lede{margin:0;color:var(--mist);max-width:44em}
+.feats{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px}
+.feats li{display:flex;gap:12px;align-items:flex-start;padding-block:12px;border-bottom:1px solid var(--line);color:var(--mist);font-size:16px}
+.feats svg{flex:none;width:14px;height:14px;margin-top:5px}
+.disc{font-size:14px;color:var(--mist-dim);margin:0}
+@media (max-width:900px){.work{grid-template-columns:1fr}.tabs{position:static;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:4px}.tab{flex:0 0 min(240px,72%);scroll-snap-align:start}.feats{grid-template-columns:1fr}}
+
+/* device frame */
+.device{background:var(--navy);border:1px solid var(--navy-2);border-radius:26px;padding:16px;min-width:0;box-shadow:0 30px 80px -40px rgba(61,107,255,.45);position:relative;overflow:hidden}
+.dbar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}
+.dtitle{font:500 12px var(--f-mono);color:var(--mist);letter-spacing:.06em;display:flex;align-items:center;gap:8px}
+.dtitle b{color:var(--white);font-weight:500}
+.seg{display:flex;flex-wrap:wrap;gap:4px;background:var(--midnight);border-radius:999px;padding:4px}
+.seg button{border:0;background:transparent;border-radius:999px;padding:7px 12px;min-height:34px;font:500 12px var(--f-mono);letter-spacing:.04em;color:var(--mist-dim);cursor:pointer;transition:background .25s,color .25s}
+.seg button[aria-pressed="true"]{background:var(--signal);color:var(--white)}
+.seg button:disabled{opacity:.4;cursor:not-allowed}
+.hint{font:500 12px var(--f-mono);color:var(--mist-dim);margin-top:12px;display:flex;align-items:center;gap:8px}
+.hint::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--signal-soft);animation:pulse 2s infinite}
+
+/* kitchen */
+.branches{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:12px;scrollbar-width:thin}
+.branches button{flex:none;border:1px solid var(--line);background:transparent;border-radius:10px;padding:6px 10px;min-height:32px;font:500 12px var(--f-mono);color:var(--mist-dim);cursor:pointer}
+.branches button[aria-pressed="true"]{border-color:var(--signal-soft);color:var(--white);background:var(--navy-2)}
+.kds{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;min-height:300px}
+.col{background:var(--midnight);border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.col h4{margin:0 0 2px;display:flex;justify-content:space-between;font:500 12px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mist)}
+.col h4 .c{color:var(--white);background:var(--navy-2);border-radius:6px;padding:0 7px;font-variant-numeric:tabular-nums}
+.ticket{all:unset;box-sizing:border-box;display:grid;gap:4px;padding:10px 11px;border-radius:12px;background:var(--navy);border:1px solid var(--line);cursor:pointer;transition:border-color .2s,transform .2s var(--ease);font-family:var(--f-display)}
+.ticket:hover{border-color:var(--signal-soft);transform:translateY(-2px)}
+.ticket:focus-visible{outline:2px solid var(--signal-soft);outline-offset:2px}
+.ticket.in{animation:tin .5s var(--ease) both}
+@keyframes tin{from{opacity:0;transform:translateY(-10px) scale(.96)}}
+.ticket .t1{display:flex;justify-content:space-between;font:500 12px var(--f-mono);font-variant-numeric:tabular-nums}
+.ticket .it{font-size:13px;color:var(--mist);line-height:1.35}
+.ticket .src{font:500 11px var(--f-mono);color:var(--signal-soft)}
+.ticket.late .el{color:var(--warn)}
+.col[data-s="2"] .ticket{border-color:color-mix(in srgb,var(--ok) 60%,var(--line))}
+.col[data-s="2"] .ticket .el{color:var(--ok)}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:10px}
+.stat{background:var(--midnight);border-radius:14px;padding:10px 12px;min-width:0}
+.stat .k{font:500 11px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--mist-dim)}
+.stat .v{font-size:clamp(18px,2.4vw,24px);font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.stat.bump .v{animation:bump .5s var(--ease)}
+@keyframes bump{40%{color:var(--ok);transform:scale(1.06)}}
+.stat .v{display:inline-block;transform-origin:left center}
+@media (max-width:560px){.kds{grid-template-columns:repeat(3,minmax(140px,1fr));overflow-x:auto;min-height:0}.stats{grid-template-columns:1fr 1fr}.stats .stat:last-child{grid-column:span 2}}
+
+/* seats */
+.hall-wrap{position:relative;direction:ltr;min-height:330px;display:grid;align-content:center}
+.screen{height:22px;margin:0 auto 22px;width:82%;border-top:3px solid var(--signal-soft);border-radius:50% 50% 0 0/100% 100% 0 0;text-align:center;font:500 10px var(--f-mono);letter-spacing:.35em;color:var(--signal-soft);padding-top:7px;filter:drop-shadow(0 -6px 14px rgba(143,167,255,.45))}
+.seats{display:grid;gap:6px;justify-content:center;overflow-x:auto;padding:4px}
+.srow{display:flex;gap:5px;align-items:center;justify-content:center}
+.srow .rl{width:14px;font:500 10px var(--f-mono);color:var(--mist-dim);text-align:center;flex:none}
+.seat{all:unset;box-sizing:border-box;flex:none;width:var(--sz,26px);height:var(--sz,26px);border-radius:7px 7px 4px 4px;border:2px solid var(--signal-soft);cursor:pointer;transition:transform .18s var(--ease),background .2s,border-color .2s}
+.seat:hover{transform:translateY(-2px) scale(1.08);background:color-mix(in srgb,var(--signal-soft) 25%,transparent)}
+.seat:focus-visible{outline:2px solid var(--white);outline-offset:2px}
+.seat.taken{border-color:var(--navy-2);background:var(--navy-2);cursor:not-allowed}
+.seat.taken:hover{transform:none}
+.seat.mine{border-color:var(--ok);background:var(--ok);animation:pick .35s var(--ease)}
+@keyframes pick{50%{transform:scale(1.25)}}
+.gapc{flex:none;width:calc(var(--sz,26px)*.6)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:16px;font-size:12px;color:var(--mist)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:4px;border:2px solid var(--signal-soft);display:inline-block}
+.legend i.t{background:var(--navy-2);border-color:var(--navy-2)}
+.legend i.m{background:var(--ok);border-color:var(--ok)}
+#pov{position:absolute;inset:0;width:100%;height:100%;border-radius:16px}
+.summary{margin-top:14px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:var(--midnight);border-radius:16px;padding:12px 14px}
+.summary .a{font-weight:700}
+.summary .b{font-size:13px;color:var(--mist)}
+.timer{font:500 22px var(--f-mono);font-variant-numeric:tabular-nums;color:var(--mist-dim)}
+.timer.on{color:var(--warn)}
+
+/* ---------- services ---------- */
+.svc{border-top:1px solid var(--line)}
+.srv{border-bottom:1px solid var(--line);position:relative}
+.srv::after{content:"";position:absolute;inset-inline-start:0;bottom:-1px;height:2px;width:0;background:var(--signal);transition:width .6s var(--ease)}
+.srv.open::after,.srv:hover::after{width:100%}
+.srv-h{all:unset;box-sizing:border-box;width:100%;display:grid;grid-template-columns:56px minmax(0,1fr) 44px;align-items:center;gap:12px;padding-block:26px;cursor:pointer}
+.srv-h:focus-visible{outline:2px solid var(--signal-soft);outline-offset:4px;border-radius:8px}
+.srv-h .ix{font:500 13px var(--f-mono);color:var(--signal-soft)}
+.srv-h .nm{font-size:clamp(28px,4.6vw,56px);font-weight:700;letter-spacing:-.035em;line-height:1;transition:transform .5s var(--ease),color .3s;color:var(--mist)}
+html[lang="ar"] .srv-h .nm{letter-spacing:0}
+.srv:hover .nm,.srv.open .nm{color:var(--white);transform:translateX(12px)}
+html[dir="rtl"] .srv:hover .nm,html[dir="rtl"] .srv.open .nm{transform:translateX(-12px)}
+.plus{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;transition:transform .4s var(--ease),background .3s,border-color .3s}
+.srv.open .plus{transform:rotate(45deg);background:var(--signal);border-color:var(--signal)}
+.srv-b{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--ease)}
+.srv.open .srv-b{grid-template-rows:1fr}
+.srv-b > div{overflow:hidden}
+.srv-in{display:grid;grid-template-columns:56px minmax(0,1fr) minmax(0,1fr);gap:12px 24px;padding-bottom:28px}
+.srv-in p{margin:0;color:var(--mist);grid-column:2;max-width:32em;font-size:18px}
+.tags{grid-column:3;display:flex;flex-wrap:wrap;gap:8px;align-content:start}
+.tags span{font:500 12px var(--f-mono);padding:7px 11px;border-radius:999px;background:var(--navy);color:var(--mist)}
+@media (max-width:760px){.srv-h{grid-template-columns:36px minmax(0,1fr) 44px}.srv-in{grid-template-columns:36px minmax(0,1fr)}.tags{grid-column:2}}
+
+/* ---------- industries ---------- */
+.inds{display:flex;gap:10px;min-height:420px}
+.ind{flex:1 1 0;min-width:0;position:relative;background:var(--midnight-2);border:1px solid var(--line);border-radius:22px;overflow:hidden;transition:flex-grow .6s var(--ease),background .3s,border-color .3s;display:flex;flex-direction:column}
+.ind::before{content:"";position:absolute;inset:auto -30% -40% auto;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--signal) 35%,transparent),transparent 70%);opacity:0;transition:opacity .5s;pointer-events:none}
+html[dir="rtl"] .ind::before{inset:auto auto -40% -30%}
+.ind.on{flex-grow:3.4;background:var(--navy);border-color:var(--signal)}
+.ind.on::before{opacity:1}
+.ind:hover:not(.on){border-color:var(--navy-2);background:var(--navy)}
+.ind-h{all:unset;box-sizing:border-box;display:flex;flex-direction:column;gap:10px;padding:22px;cursor:pointer;flex:1;justify-content:space-between;min-height:100%}
+.ind-h:focus-visible{outline:2px solid var(--signal-soft);outline-offset:-4px;border-radius:22px}
+.ind-h .ix{font:500 13px var(--f-mono);color:var(--signal-soft)}
+.ind-h .nm{font-size:20px;font-weight:700;letter-spacing:-.02em;line-height:1.15;overflow-wrap:anywhere;transition:font-size .5s var(--ease)}
+.ind.on .ind-h{flex:0;justify-content:flex-start;padding-bottom:0}
+.ind.on .ind-h .nm{font-size:clamp(26px,3vw,38px)}
+.ind-b{display:none;padding:0 22px 22px;gap:16px;flex-direction:column;flex:1;justify-content:flex-end;position:relative}
+.ind.on .ind-b{display:flex;animation:pin .5s var(--ease) .15s both}
+.pf{display:grid;gap:4px;max-width:30em}
+.pf .k{font:500 11px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mist-dim)}
+.pf .k.fix{color:var(--ok)}
+.pf p{margin:0;font-size:17px;color:var(--mist)}
+.pf.fixed p{color:var(--white)}
+.arrow-line{width:40px;height:2px;background:var(--line);border-radius:2px}
+.ind-b .btn{align-self:flex-start;min-height:44px;font-size:15px}
+@media (max-width:860px){.inds{flex-direction:column;min-height:0}.ind,.ind.on{flex:none}.ind-h{flex-direction:row;align-items:baseline;justify-content:flex-start;gap:14px;min-height:0}.ind.on .ind-h{padding-bottom:6px}.ind-b{padding-top:10px}}
+
+/* ---------- process ---------- */
+.proc{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;list-style:none;margin:0;padding:0;--p:0}
+.rail{position:absolute;inset-inline:0;top:22px;height:2px;background:var(--line);border-radius:2px}
+.rail i{position:absolute;inset-block:0;inset-inline-start:0;width:calc(var(--p)*100%);background:var(--signal);border-radius:2px;box-shadow:0 0 18px var(--signal)}
+.step{position:relative;display:grid;gap:12px;align-content:start}
+.node{width:46px;height:46px;border-radius:50%;background:var(--midnight);border:2px solid var(--line);display:grid;place-items:center;font:500 14px var(--f-mono);color:var(--mist-dim);transition:all .4s var(--ease)}
+.step.lit .node{border-color:var(--signal);background:var(--signal);color:var(--white);box-shadow:0 0 0 6px color-mix(in srgb,var(--signal) 22%,transparent)}
+.step h3{font-size:26px;letter-spacing:-.02em;margin-top:10px}
+.step p{margin:0;color:var(--mist)}
+@media (max-width:760px){.proc{grid-template-columns:1fr;gap:30px;padding-inline-start:62px}.rail{inset-inline-start:22px;inset-inline-end:auto;top:0;bottom:0;width:2px;height:auto}.rail i{width:auto;inset-inline:0;height:calc(var(--p)*100%);bottom:auto}.node{position:absolute;inset-inline-start:-62px;top:0}.step h3{margin-top:6px}}
+
+/* ---------- contact ---------- */
+.contact{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:48px;align-items:start}
+.contact h2{font-size:clamp(42px,6.4vw,84px);margin-top:16px}
+.contact .intro{margin-top:20px}
+.builder{background:var(--navy);border:1px solid var(--navy-2);border-radius:26px;padding:24px;display:grid;gap:20px;min-width:0}
+fieldset{border:0;margin:0;padding:0;display:grid;gap:10px;min-width:0}
+legend,.flabel{font:500 12px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mist-dim);padding:0;margin-bottom:10px}
+.flabel{display:block;margin-bottom:8px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.opt span{display:inline-flex;align-items:center;min-height:42px;padding:0 16px;border-radius:999px;border:1px solid var(--line);color:var(--mist);transition:all .2s;font-size:15px}
+.opt input:checked + span{background:var(--signal);border-color:var(--signal);color:var(--white)}
+.opt input:focus-visible + span{outline:2px solid var(--signal-soft);outline-offset:2px}
+.opt:hover span{border-color:var(--signal-soft)}
+.txt{width:100%;min-height:46px;border-radius:14px;border:1px solid var(--line);background:var(--midnight);color:var(--white);padding:0 14px;font:inherit;font-size:16px}
+.txt::placeholder{color:var(--mist-dim)}
+.txt:focus{outline:2px solid var(--signal-soft);outline-offset:1px}
+.msg{background:var(--midnight);border-radius:16px;padding:16px;font-size:16px;line-height:1.6;color:var(--white);min-height:96px;border:1px dashed var(--navy-2)}
+.msg .caret{display:inline-block;width:2px;height:1.1em;background:var(--signal-soft);vertical-align:-3px;margin-inline-start:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.acts{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.mailline{display:flex;flex-wrap:wrap;align-items:center;gap:10px;font:500 15px var(--f-mono);color:var(--mist)}
+.mailline code{font:inherit;color:var(--white);user-select:all;overflow-wrap:anywhere;direction:ltr}
+.toast{font:500 13px var(--f-mono);color:var(--ok)}
+@media (max-width:900px){.contact{grid-template-columns:1fr;gap:32px}}
+
+footer{border-top:1px solid var(--line);padding-block:28px;color:var(--mist-dim);font:500 13px var(--f-mono)}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+footer a{color:var(--mist);text-decoration:none}
+footer a:hover{color:var(--white)}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs><symbol id="v" viewBox="0 0 100 100"><circle cx="50" cy="50" r="41" fill="none" stroke="currentColor" stroke-width="15"></circle><rect x="21" y="42" width="58" height="16" rx="8" fill="#3D6BFF"></rect></symbol></defs>
+</svg>
+
+<div class="navbar">
+  <nav class="nav" aria-label="Main">
+    <a class="logo" href="#top" aria-label="Incog">inc<svg class="visor" viewBox="0 0 100 100" aria-hidden="true"><use href="#v"></use></svg>g</a>
+    <ul class="links" id="links">
+      <li><a href="#work" data-t="nav.work">Work</a></li>
+      <li class="navopt"><a href="#services" data-t="nav.services">Solutions</a></li>
+      <li class="navopt"><a href="#industries" data-t="nav.ind">Industries</a></li>
+      <li><a href="#contact" data-t="nav.contact">Contact</a></li>
+      <li class="pill" id="pill" aria-hidden="true"></li>
+    </ul>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" id="l-en" data-l="en" aria-pressed="true">EN</button>
+      <button type="button" id="l-ar" data-l="ar" aria-pressed="false" lang="ar">ع</button>
+    </div>
+  </nav>
+</div>
+
+<main id="top">
+  <header class="hero" id="hero">
+    <canvas id="field" aria-hidden="true"></canvas>
+    <div class="wrap hero-inner">
+      <span class="status"><span class="pulse"></span><span data-t="hero.status">Taking new projects</span> · <span id="clock">Cairo</span></span>
+      <h1 class="mark" aria-label="incog">
+        <span aria-hidden="true">inc</span><svg class="eye visor" viewBox="0 0 100 100" aria-hidden="true"><circle class="ring" cx="50" cy="50" r="41"></circle><rect class="slit" id="slit" x="21" y="42" width="58" height="16" rx="8"></rect></svg><span aria-hidden="true">g</span>
+      </h1>
+      <div class="hero-row">
+        <p class="headline"><span id="scramble" data-t="hero.h">Built quietly.</span><span class="alt" id="altline" lang="ar" dir="rtl">بنبني في صمت.</span></p>
+        <div>
+          <p class="intro" data-t="hero.p">A small software studio in Egypt. We build ordering, booking and operations systems for businesses that want their own tools, under their own name, instead of paying commission to someone else's app.</p>
+          <div class="ctas">
+            <a class="btn primary mag" href="#work"><span data-t="hero.c1">Try the demos</span><svg class="arr" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a class="btn mag" href="#contact" data-t="hero.c2">Start a project</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track" id="track"></div>
+  </div>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div><span class="label" data-t="work.label">Selected work</span><h2 data-t="work.h">Don't read about it. Use it.</h2></div>
+        <p data-t="work.p">Both projects are concept builds we made on our own, to show what a real system for these businesses could look like. They are not commissioned by, affiliated with, or in use at the companies named.</p>
+      </div>
+
+      <div class="work rv">
+        <div class="tabs" role="tablist" aria-label="Projects">
+          <button class="tab" role="tab" id="tab-1" aria-controls="panel-1" aria-selected="true">
+            <span class="ix">01</span><span class="nm" data-t="p1.name">El Baraka ordering</span><span class="ty" data-t="p1.type">Restaurants · Web app</span>
+          </button>
+          <button class="tab" role="tab" id="tab-2" aria-controls="panel-2" aria-selected="false" tabindex="-1">
+            <span class="ix">02</span><span class="nm" data-t="p2.name">Scene seat booking</span><span class="ty" data-t="p2.type">Cinema · 3D booking</span>
+          </button>
+          <a class="tab next" href="#contact">
+            <span class="ix">03</span><span class="nm" data-t="p3.name">Your system</span><span class="ty" data-t="p3.type">Next in line →</span>
+          </a>
+        </div>
+
+        <div class="stage">
+          <!-- Panel 1: kitchen -->
+          <div class="panel" role="tabpanel" id="panel-1" aria-labelledby="tab-1">
+            <div class="p-head"><h3 data-t="p1.name">El Baraka ordering</h3><span class="chip" data-t="concept">Concept build</span></div>
+            <p class="lede" data-t="p1.lede">A full ordering system for a fried-chicken chain with 10 branches. Customers order under the restaurant's own name, and every order is tracked from the phone to the kitchen to the rider's cash.</p>
+            <div class="device">
+              <div class="dbar">
+                <span class="dtitle"><span class="pulse"></span><b data-t="kds.title">Kitchen screen</b> · <span data-t="kds.sim">Sample data, simulated</span></span>
+                <div class="seg" role="group" aria-label="Simulation">
+                  <button type="button" id="sim-toggle" aria-pressed="true" data-t="kds.live">Live</button>
+                </div>
+              </div>
+              <div class="branches" id="branches" role="group" aria-label="Branch"></div>
+              <div class="kds" id="kds"></div>
+              <div class="stats">
+                <div class="stat" id="st-o"><div class="k" data-t="kds.orders">Orders today</div><div class="v">0</div></div>
+                <div class="stat" id="st-r"><div class="k" data-t="kds.riders">Out with riders</div><div class="v">0</div></div>
+                <div class="stat" id="st-c"><div class="k" data-t="kds.cash">Cash to collect</div><div class="v">0</div></div>
+              </div>
+              <div class="hint" data-t="kds.hint">Tap a ticket to move it forward</div>
+            </div>
+            <ul class="feats">
+              <li><svg class="visor" viewBox="0 0 100 100" aria-hidden="true"><use href="#v"></use></svg><span data-t="p1.f1">Order from a QR code or a link on the restaurant's page</span></li>
+              <li><svg class="visor" viewBox="0 0 100 100" aria-hidden="true"><use href="#v"></use></svg><span data-t="p1.f2">Kitchen and pickup screens that update instantly</span></li>
+              <li><svg class="visor" viewBox="0 0 100 100" aria-hidden="true"><use href="#v"></use></svg><span data-t="p1.f3">Rider assignment and cash collection, fully tracked</span></li>
+              <li><svg class="visor" viewBox="0 0 100 100" aria-hidden="true"><use href="#v"></use></svg><span data-t="p1.f4">One dashboard for every branch, no commission per order</span></li>
+            </ul>
+            <p class="disc" data-t="p1.note">Independent concept. Not commissioned by or affiliated with El Baraka.</p>
+          </div>
+
+          <!-- Panel 2: seats -->
+          <div class="panel" role="tabpanel" id="panel-2" aria-labelledby="tab-2" hidden>
+            <div class="p-head"><h3 data-t="p2.name">Scene seat booking</h3><span class="chip" data-t="concept">Concept build</span></div>
+            <p class="lede" data-t="p2.lede">A seat picker for a multiplex in East Cairo, built on the cinema's real hall layouts. Guests pick seats on a map, then see the screen from their exact seat before they pay.</p>
+            <div class="device">
+              <div class="dbar">
+                <div class="seg" role="group" aria-label="Hall">
+                  <button type="button" data-h="prem" aria-pressed="true" data-t="seat.prem">Premiere</button>
+                  <button type="button" data-h="std" aria-pressed="false" data-t="seat.std">Standard</button>
+                  <button type="button" data-h="imax" aria-pressed="false" data-t="seat.imax">IMAX</button>
+                </div>
+                <div class="seg" role="group" aria-label="View">
+                  <button type="button" id="v-map" aria-pressed="true" data-t="seat.map">Map</button>
+                  <button type="button" id="v-pov" aria-pressed="false" disabled data-t="seat.view">View from seat</button>
+                </div>
+              </div>
+              <div class="hall-wrap" id="hallwrap">
+                <div id="mapview">
+                  <div class="screen" data-t="seat.screen">SCREEN</div>
+                  <div class="seats" id="seats"></div>
+                  <div class="legend"><span><i></i><span data-t="seat.free">Free</span></span><span><i class="t"></i><span data-t="seat.taken">Taken</span></span><span><i class="m"></i><span data-t="seat.mine">Your seats</span></span></div>
+                </div>
+                <canvas id="pov" hidden aria-label="Simulated view of the screen from your seat" role="img"></canvas>
+              </div>
+              <div class="summary">
+                <div><div class="a" id="sum-a">Premiere · 7:45 PM</div><div class="b" id="sum-b">Pick up to 6 seats</div></div>
+                <div class="timer" id="timer" aria-live="off">10:00</div>
+              </div>
+              <div class="hint" id="seat-hint" data-t="seat.hint">Tap seats to pick them, then try "View from seat"</div>
+            </div>
+            <ul class="feats">
+              <li><svg class="visor" viewBox="0 0 100 100" aria-hidden="true"><use href="#v"></use></svg><span data-t="p2.f1">Real seat plans for Premiere, Standard &amp; Deluxe and IMAX</span></li>
+              <li><svg class="visor" viewBox="0 0 100 100" aria-hidden="true"><use href="#v"></use></svg><span data-t="p2.f2">2D seat map and a full 3D hall</span></li>
+              <li><svg class="visor" viewBox="0 0 100 100" aria-hidden="true"><use href="#v"></use></svg><span data-t="p2.f3">"View from seat" before checkout</span></li>
+              <li><svg class="visor" viewBox="0 0 100 100" aria-hidden="true"><use href="#v"></use></svg><span data-t="p2.f4">10-minute seat hold with a live timer</span></li>
+            </ul>
+            <p class="disc" data-t="p2.note">Independent concept. Not commissioned by or affiliated with Scene Cinemas. This preview uses simplified layouts.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div><span class="label" data-t="svc.label">What we build</span><h2 data-t="svc.h">Systems that run the business.</h2></div>
+        <p data-t="svc.p">We take one process that lives on paper, WhatsApp or someone else's app, and turn it into a system you own.</p>
+      </div>
+      <div class="svc rv" id="svc"></div>
+    </div>
+  </section>
+
+  <section id="industries">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div><span class="label" data-t="ind.label">Who we build for</span><h2 data-t="ind.h">If it runs on paper or WhatsApp, it can run on a system.</h2></div>
+        <p data-t="ind.p">Different businesses, same problem: work tracked in notebooks, chats and memory. Pick yours to see where we would start.</p>
+      </div>
+      <div class="inds rv" id="inds"></div>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div><span class="label" data-t="proc.label">How we work</span><h2 data-t="proc.h">Demo first. Talk second.</h2></div>
+        <p data-t="proc.p">You see a working version of your system before you pay for the full build.</p>
+      </div>
+      <ol class="proc" id="proc">
+        <li class="rail" aria-hidden="true"><i></i></li>
+        <li class="step"><span class="node">1</span><h3 data-t="s1.t">A short call</h3><p data-t="s1.d">We learn how orders, bookings or cash move through your business today.</p></li>
+        <li class="step"><span class="node">2</span><h3 data-t="s2.t">A working demo</h3><p data-t="s2.d">We build a version you can click through, with your menu, halls or branches in it.</p></li>
+        <li class="step"><span class="node">3</span><h3 data-t="s3.t">Launch and support</h3><p data-t="s3.d">We set it up in your branches, train your staff, and stay on call.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap contact">
+      <div class="rv">
+        <span class="label" data-t="ct.label">Contact</span>
+        <h2 data-t="ct.h">Have a process that needs a system?</h2>
+        <p class="intro" data-t="ct.p">Pick what you need, copy the message, and send it to us. We reply within a day.</p>
+      </div>
+      <form class="builder rv" id="builder" novalidate>
+        <fieldset>
+          <legend data-t="ct.need">I need</legend>
+          <div class="opts" id="need"></div>
+        </fieldset>
+        <fieldset>
+          <legend data-t="ct.for">For my</legend>
+          <div class="opts" id="biz"></div>
+        </fieldset>
+        <div>
+          <label class="flabel" for="bname" data-t="ct.name">Business name (optional)</label>
+          <input class="txt" id="bname" type="text" autocomplete="organization" data-tp="ct.ph" placeholder="e.g. Nile Grill">
+        </div>
+        <div>
+          <span class="flabel" data-t="ct.preview">Your message</span>
+          <div class="msg" id="msg" aria-live="polite"></div>
+        </div>
+        <div class="acts">
+          <button type="submit" class="btn primary mag" data-t="ct.copyMsg">Copy message</button>
+          <span class="toast" id="toast" aria-live="polite"></span>
+        </div>
+        <div class="mailline"><span data-t="ct.send">Send it to</span> <code id="email">incog.get@gmail.com</code> <button type="button" class="btn" id="copy-mail" style="min-height:40px;padding:0 14px;font-size:14px" data-t="ct.copyEmail">Copy email</button></div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap"><span>© 2026 Incog · <span data-t="foot.b">Built quietly.</span></span><span id="clock2"></span><a href="#top" data-t="foot.top">Back to top ↑</a></div>
+</footer>
+
+<script>
+(function(){
+var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+var finePtr = window.matchMedia && matchMedia('(pointer: fine)').matches;
+function $(s,r){return (r||document).querySelector(s)}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+
+/* ================= i18n ================= */
+var T = {
+en:{
+ 'nav.work':'Work','nav.services':'Solutions','nav.ind':'Industries','nav.process':'Process','nav.contact':'Contact',
+ 'hero.status':'Taking new projects','hero.h':'Built quietly.','hero.alt':'بنبني في صمت.',
+ 'hero.p':"Incog is a software company in Egypt. We build custom systems for businesses: ordering, booking, dashboards and the internal tools your team uses every day. Under your name, owned by you, with no commission to anyone else's app.",
+ 'hero.c1':'Try the demos','hero.c2':'Start a project',
+ 'work.label':'Examples of our work','work.h':"Don't read about it. Use it.",
+ 'work.p':'Two examples of the systems we build, and you can try both right here. They are concept builds we made on our own: not commissioned by, affiliated with, or in use at the companies named.',
+ 'p1.name':'El Baraka ordering','p1.type':'Restaurants · Web app','p2.name':'Scene seat booking','p2.type':'Cinema · 3D booking','p3.name':'Your system','p3.type':'Next in line →',
+ 'concept':'Concept build',
+ 'p1.lede':"A full ordering system for a fried-chicken chain with 10 branches. Customers order under the restaurant's own name, and every order is tracked from the phone to the kitchen to the rider's cash.",
+ 'p1.f1':"Order from a QR code or a link on the restaurant's page",'p1.f2':'Kitchen and pickup screens that update instantly','p1.f3':'Rider assignment and cash collection, fully tracked','p1.f4':'One dashboard for every branch, no commission per order',
+ 'p1.note':'Independent concept. Not commissioned by or affiliated with El Baraka.',
+ 'p2.lede':"A seat picker for a multiplex in East Cairo, built on the cinema's real hall layouts. Guests pick seats on a map, then see the screen from their exact seat before they pay.",
+ 'p2.f1':'Real seat plans for Premiere, Standard & Deluxe and IMAX','p2.f2':'2D seat map and a full 3D hall','p2.f3':'"View from seat" before checkout','p2.f4':'10-minute seat hold with a live timer',
+ 'p2.note':'Independent concept. Not commissioned by or affiliated with Scene Cinemas. This preview uses simplified layouts.',
+ 'kds.title':'Kitchen screen','kds.sim':'Sample data, simulated','kds.live':'Live','kds.paused':'Paused','kds.new':'New','kds.cooking':'Cooking','kds.ready':'Ready','kds.orders':'Orders today','kds.riders':'Out with riders','kds.cash':'Cash to collect','kds.hint':'Tap a ticket to move it forward','kds.branch':'Branch',
+ 'kds.table':'QR · Table','kds.delivery':'Delivery','kds.pickup':'Pickup','kds.rider':'Rider','kds.cod':'Cash on delivery',
+ 'm.0':'Chicken box','m.1':'Spicy sandwich','m.2':'Family bucket','m.3':'Fries','m.4':'Coleslaw','m.5':'Rice bowl',
+ 'seat.prem':'Premiere','seat.std':'Standard','seat.imax':'IMAX','seat.map':'Map','seat.view':'View from seat','seat.screen':'SCREEN','seat.free':'Free','seat.taken':'Taken','seat.mine':'Your seats',
+ 'seat.none':'Pick up to 6 seats','seat.seats':'Seats','seat.max':'Up to 6 seats per booking','seat.expired':'Hold expired. Seats released.',
+ 'seat.hint':'Tap seats to pick them, then try "View from seat"','seat.povhint':'Simulated view from seat','seat.row':'Row','seat.seat':'Seat',
+ 'svc.label':'Solutions','svc.h':'Systems that run the business.','svc.p':"We take one process that lives on paper, WhatsApp or someone else's app, and turn it into a system you own.",
+ 'svc.0':'Ordering systems','svc.0d':'Online ordering, kitchen screens, riders and cash, for restaurants and cafés with one branch or many.','svc.0k':'QR menus|Kitchen screens|Riders & cash|Multi-branch',
+ 'svc.1':'Booking systems','svc.1d':'Seats, tables, appointments and courts, with live availability and holds that stop double bookings.','svc.1k':'Seat maps|Time slots|Seat holds|Reminders',
+ 'svc.2':'Dashboards','svc.2d':'One screen with the numbers that matter today, across every branch, team or location.','svc.2k':'Sales|Branches|Staff|Daily reports',
+ 'svc.3':'Internal tools','svc.3d':'Stock, staff, customers and approvals: the tools your team uses every day, built around how you already work.','svc.3k':'Stock|Staff|Customers (CRM)|Approvals',
+ 'svc.4':'Websites','svc.4d':'Fast sites in Arabic and English that bring customers into the systems above.','svc.4k':'Arabic & English|Mobile first|Fast hosting',
+ 'ind.label':'Who we build for','ind.h':'If it runs on paper or WhatsApp, it can run on a system.','ind.p':'Different businesses, same problem: work tracked in notebooks, chats and memory. Pick yours to see where we would start.',
+ 'ind.prob':'The problem','ind.fix':'What we build','ind.cta':'Plan a system for this',
+ 'i.0':'Restaurants & cafés','i.0p':'Orders get lost between WhatsApp, the phone and the kitchen.','i.0f':'Online ordering, kitchen screens, riders and cash in one place.',
+ 'i.1':'Cinemas & entertainment','i.1p':'Double bookings and long queues at the counter.','i.1f':'Seat maps, online booking, and seat holds that stop double sales.',
+ 'i.2':'Clinics','i.2p':'Appointments live in a notebook, and patients wait without knowing their turn.','i.2f':'Online appointments, reminders and a live queue.',
+ 'i.3':'Retail & shops','i.3p':"You can't see stock until it runs out, and every branch counts differently.",'i.3f':'Stock tracking, sales per branch and simple daily reports.',
+ 'i.4':'Education & training','i.4p':'Classes, fees and attendance are spread across sheets and chats.','i.4f':'Schedules, fee tracking and attendance in one dashboard.',
+ 'proc.label':'How we work','proc.h':'Demo first. Talk second.','proc.p':'You see a working version of your system before you pay for the full build.',
+ 's1.t':'A short call','s1.d':'We learn how orders, bookings or cash move through your business today.',
+ 's2.t':'A working demo','s2.d':'We build a version you can click through, with your menu, halls or branches in it.',
+ 's3.t':'Launch and support','s3.d':'We set it up in your branches, train your staff, and stay on call.',
+ 'ct.label':'Contact','ct.h':'Have a process that needs a system?','ct.p':'Pick what you need, copy the message, and send it to us. We reply within a day.',
+ 'ct.need':'I need','ct.for':'For my','ct.name':'Business name (optional)','ct.ph':'e.g. Nile Grill','ct.preview':'Your message',
+ 'ct.copyMsg':'Copy message','ct.copyEmail':'Copy email','ct.send':'Send it to','ct.copied':'Copied','ct.sel':'Selected. Press Ctrl+C to copy.',
+ 'n.0':'Ordering system','n.1':'Booking system','n.2':'Dashboard','n.3':'Website','n.4':'Internal tool',
+ 'na.0':'an ordering system','na.1':'a booking system','na.2':'a dashboard','na.3':'a website','na.4':'an internal tool',
+ 'b.0':'Restaurant','b.1':'Cinema','b.2':'Clinic','b.3':'Shop','b.4':'School','b.5':'Other',
+ 'ba.0':'a restaurant','ba.1':'a cinema','ba.2':'a clinic','ba.3':'a shop','ba.4':'a school or training centre','ba.5':'a business',
+ 'foot.b':'Built quietly.','foot.top':'Back to top ↑','clock':'Cairo'
+},
+ar:{
+ 'nav.work':'الأعمال','nav.services':'الحلول','nav.ind':'المجالات','nav.process':'طريقتنا','nav.contact':'تواصل',
+ 'hero.status':'متاحين لمشاريع جديدة','hero.h':'بنبني في صمت.','hero.alt':'Built quietly.',
+ 'hero.p':'Incog شركة برمجيات في مصر. بنبني سيستمات مخصوصة للبيزنس: طلبات وحجز ولوحات تحكم والأدوات الداخلية اللي فريقك بيستخدمها كل يوم. باسمك، وملكك، ومن غير عمولة لتطبيق حد تاني.',
+ 'hero.c1':'جرّب الديمو','hero.c2':'ابدأ مشروع',
+ 'work.label':'أمثلة من شغلنا','work.h':'متقراش عنه. جرّبه.',
+ 'work.p':'مثالين للسيستمات اللي بنبنيها، وتقدر تجرب الاتنين هنا. دول نماذج بنيناها بنفسنا: مش بتكليف من الشركات المذكورة، ومش تابعين لها، ومش مستخدمة عندهم.',
+ 'p1.name':'طلبات البركة','p1.type':'مطاعم · تطبيق ويب','p2.name':'حجز كراسي سين','p2.type':'سينما · حجز ثلاثي الأبعاد','p3.name':'السيستم بتاعك','p3.type':'الدور الجاي ←',
+ 'concept':'نموذج تجريبي',
+ 'p1.lede':'سيستم طلبات كامل لسلسلة فراخ مقلية فيها ١٠ فروع. العميل يطلب باسم المطعم نفسه، وكل أوردر متتبع من الموبايل للمطبخ لحد كاش الطيار.',
+ 'p1.f1':'طلب من QR أو لينك على صفحة المطعم','p1.f2':'شاشات مطبخ واستلام بتتحدث لحظياً','p1.f3':'توزيع الطيارين وتحصيل الكاش متتبع بالكامل','p1.f4':'لوحة تحكم واحدة لكل الفروع، من غير عمولة على الأوردر',
+ 'p1.note':'نموذج مستقل، مش بتكليف من البركة ولا تابع لها.',
+ 'p2.lede':'اختيار كراسي لسينما في شرق القاهرة، مبني على تخطيط القاعات الحقيقي. العميل يختار كراسيه من الخريطة، ويشوف الشاشة من مكانه بالظبط قبل ما يدفع.',
+ 'p2.f1':'تخطيطات حقيقية لقاعات بريمير وستاندرد وديلوكس وآيماكس','p2.f2':'خريطة كراسي وقاعة ثلاثية الأبعاد','p2.f3':'«المنظر من الكرسي» قبل الدفع','p2.f4':'حجز مؤقت للكراسي ١٠ دقايق بعداد',
+ 'p2.note':'نموذج مستقل، مش بتكليف من سين سينما ولا تابع لها. المعاينة هنا بتخطيطات مبسطة.',
+ 'kds.title':'شاشة المطبخ','kds.sim':'بيانات تجريبية، محاكاة','kds.live':'شغال','kds.paused':'واقف','kds.new':'جديد','kds.cooking':'بيتعمل','kds.ready':'جاهز','kds.orders':'أوردرات النهارده','kds.riders':'مع الطيارين','kds.cash':'كاش للتحصيل','kds.hint':'دوس على أي أوردر عشان تنقله للخطوة الجاية','kds.branch':'فرع',
+ 'kds.table':'QR · ترابيزة','kds.delivery':'توصيل','kds.pickup':'استلام','kds.rider':'طيار','kds.cod':'كاش عند الاستلام',
+ 'm.0':'بوكس فراخ','m.1':'ساندوتش سبايسي','m.2':'باكت عائلي','m.3':'بطاطس','m.4':'كول سلو','m.5':'رايس بول',
+ 'seat.prem':'بريمير','seat.std':'ستاندرد','seat.imax':'آيماكس','seat.map':'الخريطة','seat.view':'المنظر من الكرسي','seat.screen':'الشاشة','seat.free':'متاح','seat.taken':'محجوز','seat.mine':'كراسيك',
+ 'seat.none':'اختار لحد ٦ كراسي','seat.seats':'الكراسي','seat.max':'لحد ٦ كراسي في الحجز','seat.expired':'وقت الحجز خلص واتلغت الكراسي.',
+ 'seat.hint':'دوس على الكراسي عشان تختارها، وبعدين جرّب «المنظر من الكرسي»','seat.povhint':'محاكاة للمنظر من كرسيك','seat.row':'صف','seat.seat':'كرسي',
+ 'svc.label':'الحلول','svc.h':'سيستمات بتشغّل البيزنس.','svc.p':'بناخد عملية واحدة عايشة على الورق أو الواتساب أو تطبيق حد تاني، ونحولها لسيستم ملكك.',
+ 'svc.0':'سيستمات طلبات','svc.0d':'طلب أونلاين وشاشات مطبخ وطيارين وكاش، للمطاعم والكافيهات بفرع واحد أو أكتر.','svc.0k':'منيو QR|شاشات مطبخ|طيارين وكاش|كذا فرع',
+ 'svc.1':'سيستمات حجز','svc.1d':'كراسي وترابيزات ومواعيد وملاعب، بإتاحة لحظية وحجز مؤقت يمنع الحجز المكرر.','svc.1k':'خرايط كراسي|مواعيد|حجز مؤقت|تذكير',
+ 'svc.2':'لوحات تحكم','svc.2d':'شاشة واحدة فيها الأرقام المهمة النهارده، لكل الفروع والفرق والأماكن.','svc.2k':'مبيعات|فروع|موظفين|تقارير يومية',
+ 'svc.3':'أدوات داخلية','svc.3d':'مخزون وموظفين وعملاء وموافقات: الأدوات اللي فريقك بيستخدمها كل يوم، مبنية على طريقة شغلك.','svc.3k':'مخزون|موظفين|عملاء|موافقات',
+ 'svc.4':'مواقع','svc.4d':'مواقع سريعة بالعربي والإنجليزي بتجيب العملاء للسيستمات دي.','svc.4k':'عربي وإنجليزي|للموبايل أولاً|استضافة سريعة',
+ 'ind.label':'بنبني لمين','ind.h':'لو شغلك ماشي على الورق أو الواتساب، يقدر يمشي على سيستم.','ind.p':'بيزنسات مختلفة ومشكلة واحدة: شغل متتبع في كشاكيل وشاتات وذاكرة. اختار مجالك وشوف هنبدأ منين.',
+ 'ind.prob':'المشكلة','ind.fix':'بنبني إيه','ind.cta':'خطط سيستم لده',
+ 'i.0':'مطاعم وكافيهات','i.0p':'أوردرات بتضيع بين الواتساب والتليفون والمطبخ.','i.0f':'طلب أونلاين وشاشات مطبخ وطيارين وكاش في مكان واحد.',
+ 'i.1':'سينمات وترفيه','i.1p':'حجز مكرر وطوابير طويلة عند الشباك.','i.1f':'خرايط كراسي وحجز أونلاين وحجز مؤقت يمنع البيع المكرر.',
+ 'i.2':'عيادات','i.2p':'المواعيد في كشكول، والمرضى مستنيين من غير ما يعرفوا دورهم.','i.2f':'مواعيد أونلاين وتذكير ودور مباشر.',
+ 'i.3':'محلات وتجزئة','i.3p':'المخزون مش باين إلا لما يخلص، وكل فرع بيعد بطريقته.','i.3f':'متابعة مخزون ومبيعات لكل فرع وتقارير يومية بسيطة.',
+ 'i.4':'تعليم وتدريب','i.4p':'الحصص والمصاريف والحضور متوزعين على شيتات وشاتات.','i.4f':'جداول ومتابعة مصاريف وحضور في لوحة واحدة.',
+ 'proc.label':'طريقتنا','proc.h':'الديمو الأول، والكلام بعدين.','proc.p':'بتشوف نسخة شغالة من السيستم بتاعك قبل ما تدفع في البناء الكامل.',
+ 's1.t':'مكالمة قصيرة','s1.d':'بنفهم الأوردرات أو الحجوزات أو الكاش بيمشوا إزاي عندك النهارده.',
+ 's2.t':'ديمو شغال','s2.d':'بنبني نسخة تقدر تجربها، فيها المنيو أو القاعات أو الفروع بتاعتك.',
+ 's3.t':'تشغيل ودعم','s3.d':'بنركّبه في فروعك وندرب فريقك ونفضل معاك.',
+ 'ct.label':'تواصل','ct.h':'عندك شغل محتاج سيستم؟','ct.p':'اختار اللي محتاجه، انسخ الرسالة، وابعتهالنا. بنرد خلال يوم.',
+ 'ct.need':'محتاج','ct.for':'لـ','ct.name':'اسم البيزنس (اختياري)','ct.ph':'مثلاً: مطعم النيل','ct.preview':'رسالتك',
+ 'ct.copyMsg':'انسخ الرسالة','ct.copyEmail':'انسخ الإيميل','ct.send':'ابعتها على','ct.copied':'اتنسخت','ct.sel':'اتحددت. دوس Ctrl+C عشان تنسخ.',
+ 'n.0':'سيستم طلبات','n.1':'سيستم حجز','n.2':'لوحة تحكم','n.3':'موقع','n.4':'أداة داخلية',
+ 'na.0':'سيستم طلبات','na.1':'سيستم حجز','na.2':'لوحة تحكم','na.3':'موقع','na.4':'أداة داخلية',
+ 'b.0':'مطعم','b.1':'سينما','b.2':'عيادة','b.3':'محل','b.4':'سنتر تعليمي','b.5':'حاجة تانية',
+ 'ba.0':'مطعم','ba.1':'سينما','ba.2':'عيادة','ba.3':'محل','ba.4':'سنتر تعليمي','ba.5':'بيزنس',
+ 'foot.b':'بنبني في صمت.','foot.top':'لفوق ↑','clock':'القاهرة'
+}};
+var lang = 'en';
+try{ var sv = localStorage.getItem('incog-lang'); if(sv==='ar'||sv==='en') lang = sv; }catch(e){}
+function t(k){ return (T[lang] && T[lang][k]) || T.en[k] || k; }
+function applyLang(){
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang==='ar' ? 'rtl' : 'ltr';
+  $$('[data-t]').forEach(function(el){ el.textContent = t(el.getAttribute('data-t')); });
+  $$('[data-tp]').forEach(function(el){ el.placeholder = t(el.getAttribute('data-tp')); });
+  var alt = $('#altline'); alt.textContent = t('hero.alt'); alt.lang = lang==='ar'?'en':'ar'; alt.dir = lang==='ar'?'ltr':'rtl';
+  $$('.lang button').forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.l===lang?'true':'false'); });
+  buildMarquee(); buildServices(); buildInds(); buildBuilder(); kitchen.render(true); seats.relabel(); movePill();
+}
+$$('.lang button').forEach(function(b){ b.addEventListener('click', function(){
+  if (lang===b.dataset.l) return; lang = b.dataset.l;
+  try{ localStorage.setItem('incog-lang', lang); }catch(e){}
+  applyLang(); scramble();
+});});
+
+/* ================= clock ================= */
+function tick(){
+  try{
+    var s = new Intl.DateTimeFormat(lang==='ar'?'ar-EG':'en-GB',{timeZone:'Africa/Cairo',hour:'2-digit',minute:'2-digit'}).format(new Date());
+    $('#clock').textContent = t('clock') + ' ' + s; $('#clock2').textContent = t('clock') + ' ' + s;
+  }catch(e){}
+}
+tick(); setInterval(tick, 15000);
+
+/* ================= scramble ================= */
+var glyphs = '█▓▒░<>/\\_=+*#01';
+function scramble(){
+  var el = $('#scramble'), final = t('hero.h');
+  if (reduce || lang==='ar'){ el.textContent = final; return; }
+  var f = 0, total = 26;
+  (function step(){
+    var out = '';
+    for (var i=0;i<final.length;i++){
+      var reveal = (f/total)*final.length*1.2 - i;
+      out += (final[i]===' '||reveal>1) ? final[i] : glyphs[(Math.random()*glyphs.length)|0];
+    }
+    el.textContent = out;
+    if (++f <= total) requestAnimationFrame(function(){ setTimeout(step, 28); }); else el.textContent = final;
+  })();
+}
+
+/* ================= hero field + eye ================= */
+var cv = $('#field'), ctx = cv.getContext('2d'), hero = $('#hero');
+var W=0,H=0,DPR=1, mx=-9999, my=-9999, heroOn=true, slit=$('#slit'), eye=$('.mark .eye');
+function size(){ DPR = Math.min(2, window.devicePixelRatio||1); W = hero.clientWidth; H = hero.clientHeight; cv.width=W*DPR; cv.height=H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0); }
+size(); window.addEventListener('resize', size);
+hero.addEventListener('pointermove', function(e){ var r = hero.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; });
+hero.addEventListener('pointerleave', function(){ mx = my = -9999; });
+window.addEventListener('pointermove', function(e){
+  if (!eye) return;
+  var r = eye.getBoundingClientRect(), cx = r.left + r.width/2, cy = r.top + r.height/2;
+  var dx = e.clientX - cx, dy = e.clientY - cy, d = Math.hypot(dx,dy)||1;
+  var k = Math.min(1, d/400);
+  slit.style.transform = 'translate(' + (dx/d*9*k).toFixed(2) + 'px,' + (dy/d*12*k).toFixed(2) + 'px)';
+});
+if ('IntersectionObserver' in window) new IntersectionObserver(function(es){ heroOn = es[0].isIntersecting; }).observe(hero);
+function draw(now){
+  if (heroOn){
+    ctx.clearRect(0,0,W,H);
+    var gap = W<600?22:28, sweep = ((now/7000)%1.3 - .15) * W;
+    for (var y = gap/2; y < H; y += gap){
+      for (var x = gap/2; x < W; x += gap){
+        var d = Math.hypot(x-mx, y-my), near = Math.max(0, 1 - d/170);
+        var ds = Math.abs(x - sweep), sw = reduce ? 0 : Math.max(0, 1 - ds/90) * .7;
+        var a = Math.max(near, sw), fade = Math.min(1, (H - y)/(H*.5) + .25);
+        if (a > .02){
+          var len = 2 + a*14;
+          ctx.fillStyle = 'rgba(' + (a>.5?'143,167,255':'61,107,255') + ',' + (.18 + a*.7)*fade + ')';
+          ctx.beginPath(); ctx.roundRect ? ctx.roundRect(x-len/2, y-1.5, len, 3, 1.5) : ctx.rect(x-len/2,y-1.5,len,3); ctx.fill();
+        } else {
+          ctx.fillStyle = 'rgba(143,167,255,' + .13*fade + ')';
+          ctx.fillRect(x-1, y-1, 2, 2);
+        }
+      }
+    }
+  }
+  requestAnimationFrame(draw);
+}
+requestAnimationFrame(draw);
+
+/* ================= marquee ================= */
+function buildMarquee(){
+  var items = lang==='ar'
+    ? ['برمجيات مخصوصة','سيستمات طلبات','سيستمات حجز','لوحات تحكم','أدوات داخلية','مواقع عربي وإنجليزي']
+    : ['Custom software','Ordering systems','Booking systems','Dashboards','Internal tools','Bilingual websites'];
+  var one = items.map(function(s){ return '<span' + (lang==='ar'?' class="ar"':'') + '>' + s + '<svg class="visor" viewBox="0 0 100 100" aria-hidden="true"><use href="#v"></use></svg></span>'; }).join('');
+  one += '<span class="ar">بنبني في صمت<svg class="visor" viewBox="0 0 100 100" aria-hidden="true"><use href="#v"></use></svg></span>';
+  $('#track').innerHTML = one + one;
+}
+
+/* ================= nav pill ================= */
+var pill = $('#pill'), current = null;
+function movePill(){
+  var a = current && $('#links a[href="#'+current+'"]');
+  $$('#links a').forEach(function(x){ x.removeAttribute('aria-current'); });
+  if (!a || a.offsetParent===null){ pill.style.opacity = 0; return; }
+  a.setAttribute('aria-current','true');
+  var ul = $('#links').getBoundingClientRect(), r = a.getBoundingClientRect();
+  pill.style.width = r.width + 'px'; pill.style.transform = 'translateX(' + (r.left - ul.left) + 'px)'; pill.style.opacity = 1;
+}
+var secs = ['work','services','industries','contact'].map(function(id){ return document.getElementById(id); });
+function spy(){
+  var y = window.innerHeight*.4, c = null;
+  secs.forEach(function(s){ var r = s.getBoundingClientRect(); if (r.top < y && r.bottom > y) c = s.id; });
+  if (c !== current){ current = c; movePill(); }
+}
+window.addEventListener('scroll', spy, {passive:true}); window.addEventListener('resize', movePill);
+
+/* ================= tabs ================= */
+var tabs = $$('[role="tab"]');
+function selectTab(tab, focus){
+  tabs.forEach(function(x){
+    var on = x===tab; x.setAttribute('aria-selected', on); x.tabIndex = on?0:-1;
+    var p = document.getElementById(x.getAttribute('aria-controls'));
+    if (on){ p.hidden = false; p.classList.remove('enter'); void p.offsetWidth; p.classList.add('enter'); } else p.hidden = true;
+  });
+  if (focus) tab.focus();
+}
+tabs.forEach(function(tb,i){
+  tb.addEventListener('click', function(){ selectTab(tb); });
+  tb.addEventListener('keydown', function(e){
+    var k = e.key, n = null, rtl = lang==='ar';
+    if (k==='ArrowDown'||k===(rtl?'ArrowLeft':'ArrowRight')) n = tabs[(i+1)%tabs.length];
+    if (k==='ArrowUp'||k===(rtl?'ArrowRight':'ArrowLeft')) n = tabs[(i-1+tabs.length)%tabs.length];
+    if (n){ e.preventDefault(); selectTab(n, true); }
+  });
+});
+
+/* ================= count-up ================= */
+function countTo(el, to, fmt){
+  var v = el.querySelector('.v'), from = +(v.dataset.n||0);
+  v.dataset.n = to;
+  if (reduce || from===to){ v.textContent = fmt(to); return; }
+  el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump');
+  var s = performance.now();
+  (function f(n){ var k = Math.min(1,(n-s)/600), e = 1-Math.pow(1-k,3); v.textContent = fmt(Math.round(from+(to-from)*e)); if(k<1) requestAnimationFrame(f); })(s);
+}
+function num(n){ return n.toLocaleString(lang==='ar'?'ar-EG':'en-US'); }
+function egp(n){ return (lang==='ar' ? num(n) + ' ج.م' : 'EGP ' + num(n)); }
+
+/* ================= kitchen sim ================= */
+var kitchen = (function(){
+  var prices = [145,95,420,40,30,110];
+  var branch = 3, nextId = 1201, tickets = [], riders = 0, cash = 0, orders = 0, running = !reduce, visible = true, changed = {};
+  function rnd(n){ return (Math.random()*n)|0; }
+  function makeOrder(age){
+    var items = [], n = 1 + rnd(3), total = 0, used = {};
+    for (var i=0;i<n;i++){ var m = rnd(6); if (used[m]) continue; used[m]=1; var q = 1 + rnd(2); items.push([q,m]); total += q*prices[m]; }
+    var r = rnd(3), src = r===0 ? ['table', 1+rnd(14)] : r===1 ? ['delivery'] : ['pickup'];
+    return {id: nextId++, items: items, src: src, stage: 0, born: Date.now() - (age||0)*1000, total: total};
+  }
+  function seed(){
+    tickets = []; nextId = 1000 + branch*100 + rnd(40);
+    orders = 60 + branch*9 + rnd(30); riders = 2 + rnd(4); cash = riders*(300 + rnd(500));
+    tickets.push(makeOrder(30)); tickets.push(makeOrder(10));
+    var a = makeOrder(70); a.stage = 1; tickets.push(a);
+    var b = makeOrder(40); b.stage = 1; tickets.push(b);
+    var c = makeOrder(90); c.stage = 2; tickets.push(c);
+    orders += tickets.length;
+  }
+  function advance(tk){
+    changed[tk.id] = 1;
+    if (tk.stage < 2){ tk.stage++; return; }
+    tickets.splice(tickets.indexOf(tk),1); riders++; cash += tk.src[0]==='delivery' ? tk.total : 0;
+    if (tk.src[0]!=='delivery'){ /* pickup / table: paid at counter */ }
+    stats();
+  }
+  function step(){
+    if (!running || !visible) return;
+    var r = Math.random(), byStage = [0,1,2].map(function(s){ return tickets.filter(function(t){return t.stage===s;}); });
+    if (byStage[0].length < 3 && r < .45){ var o = makeOrder(0); tickets.push(o); changed[o.id]=1; orders++; stats(); }
+    else if (byStage[1].length && r < .7) advance(byStage[1][0]);
+    else if (byStage[0].length && byStage[1].length < 3) advance(byStage[0][0]);
+    else if (byStage[2].length) advance(byStage[2][0]);
+    if (riders > 2 && Math.random() < .25){ riders--; cash = Math.max(0, cash - (150 + rnd(300))); stats(); }
+    render();
+  }
+  function srcLabel(s){ return s[0]==='table' ? t('kds.table') + ' ' + num(s[1]) : t('kds.' + s[0]); }
+  function el(tk){
+    var secs = Math.floor((Date.now()-tk.born)/1000)*6, m = Math.floor(secs/60), s = secs%60;
+    return num(m) + ':' + (s<10? (lang==='ar'?'٠':'0') : '') + num(s);
+  }
+  function render(full){
+    var box = $('#kds'); if (!box) return;
+    var heads = ['kds.new','kds.cooking','kds.ready'], html = '';
+    for (var s=0;s<3;s++){
+      var list = tickets.filter(function(x){ return x.stage===s; });
+      html += '<div class="col" data-s="'+s+'"><h4><span>'+t(heads[s])+'</span><span class="c">'+num(list.length)+'</span></h4>';
+      list.forEach(function(tk){
+        var late = s===1 && (Date.now()-tk.born) > 90000;
+        var items = tk.items.map(function(it){ return num(it[0]) + '× ' + t('m.'+it[1]); }).join('<br>');
+        html += '<button type="button" class="ticket' + (changed[tk.id]&&!full?' in':'') + (late?' late':'') + '" data-id="'+tk.id+'" aria-label="#'+tk.id+'">'
+          + '<span class="t1"><span>#'+tk.id+'</span><span class="el">' + (s===2 ? t('kds.rider') : el(tk)) + '</span></span>'
+          + '<span class="it">'+items+'</span><span class="src">'+ (s===2 && tk.src[0]==='delivery' ? t('kds.cod') : srcLabel(tk.src)) +'</span></button>';
+      });
+      html += '</div>';
+    }
+    box.innerHTML = html; changed = {};
+    $('#sim-toggle').textContent = running ? t('kds.live') : t('kds.paused');
+    $('#sim-toggle').setAttribute('aria-pressed', running);
+    var bb = $('#branches'), bh = '';
+    for (var i=1;i<=10;i++) bh += '<button type="button" data-b="'+i+'" aria-pressed="'+(i===branch)+'">'+t('kds.branch')+' '+num(i)+'</button>';
+    bb.innerHTML = bh;
+    if (full) stats(true);
+  }
+  function stats(instant){
+    if (instant){ ['#st-o','#st-r','#st-c'].forEach(function(id){ $(id+' .v').dataset.n = -1; }); }
+    countTo($('#st-o'), orders, num); countTo($('#st-r'), riders, num); countTo($('#st-c'), cash, egp);
+  }
+  $('#kds').addEventListener('click', function(e){
+    var b = e.target.closest('.ticket'); if (!b) return;
+    var tk = tickets.filter(function(x){ return x.id===+b.dataset.id; })[0]; if (tk){ advance(tk); render(); var nb = $('.ticket[data-id="'+tk.id+'"]'); if (nb) nb.focus(); }
+  });
+  $('#branches').addEventListener('click', function(e){
+    var b = e.target.closest('button'); if (!b) return; branch = +b.dataset.b; seed(); render(true);
+    var nb = $('#branches button[data-b="'+branch+'"]'); if (nb) nb.focus();
+  });
+  $('#sim-toggle').addEventListener('click', function(){ running = !running; render(); });
+  if ('IntersectionObserver' in window) new IntersectionObserver(function(es){ visible = es[0].isIntersecting; }).observe($('#kds'));
+  seed();
+  setInterval(step, 2400);
+  setInterval(function(){ if (visible && !$('#panel-1').hidden) $$('#kds .ticket').forEach(function(b){ var tk = tickets.filter(function(x){return x.id===+b.dataset.id;})[0]; if (tk && tk.stage<2) b.querySelector('.el').textContent = el(tk); }); }, 1000);
+  return {render: render};
+})();
+
+/* ================= seats ================= */
+var seats = (function(){
+  var halls = {
+    prem:{rows:4, cols:9, gaps:[], time:'7:45 PM', sz:30, depth:4},
+    std: {rows:7, cols:14, gaps:[4,11], time:'8:00 PM', sz:24, depth:7},
+    imax:{rows:9, cols:18, gaps:[5,14], time:'9:30 PM', sz:19, depth:9}
+  };
+  var cur = 'prem', taken = {}, mine = [], holdEnd = 0, view = 'map', expiredMsg = false;
+  var L = 'ABCDEFGHIJ';
+  function seedTaken(){
+    taken = {}; var h = halls[cur], s = cur.length*7;
+    for (var r=0;r<h.rows;r++) for (var c=1;c<=h.cols;c++){ s = (s*9301+49297)%233280; if (s/233280 < .28) taken[L[r]+c] = 1; }
+  }
+  function draw(){
+    var h = halls[cur], box = $('#seats'), out = '';
+    box.style.setProperty('--sz', 'min(' + h.sz + 'px, calc((100vw - 120px) / ' + (h.cols + h.gaps.length*.6 + 2) + '))');
+    for (var r=0;r<h.rows;r++){
+      out += '<div class="srow"><span class="rl">'+L[r]+'</span>';
+      for (var c=1;c<=h.cols;c++){
+        if (h.gaps.indexOf(c)>-1) out += '<span class="gapc"></span>';
+        var id = L[r]+c, isT = taken[id], isM = mine.indexOf(id)>-1;
+        out += '<button type="button" class="seat'+(isT?' taken':'')+(isM?' mine':'')+'" data-id="'+id+'" aria-label="'+t('seat.row')+' '+L[r]+', '+t('seat.seat')+' '+c+(isT?', '+t('seat.taken'):isM?', '+t('seat.mine'):'')+'" aria-pressed="'+isM+'"'+(isT?' aria-disabled="true"':'')+'></button>';
+      }
+      out += '<span class="rl">'+L[r]+'</span></div>';
+    }
+    box.innerHTML = out; summary();
+  }
+  function summary(){
+    $('#sum-a').textContent = t('seat.'+cur) + ' · ' + halls[cur].time;
+    $('#sum-b').textContent = expiredMsg ? t('seat.expired') : mine.length ? t('seat.seats') + ' ' + mine.join(', ') : t('seat.none');
+    $('#v-pov').disabled = !mine.length;
+    if (!mine.length && view==='pov') setView('map');
+  }
+  function setView(v){
+    view = v; $('#v-map').setAttribute('aria-pressed', v==='map'); $('#v-pov').setAttribute('aria-pressed', v==='pov');
+    $('#mapview').style.visibility = v==='map' ? 'visible' : 'hidden'; $('#pov').hidden = v!=='pov';
+    if (v==='pov') pov();
+  }
+  $('#seats').addEventListener('click', function(e){
+    var b = e.target.closest('.seat'); if (!b || b.classList.contains('taken')) return;
+    var id = b.dataset.id, i = mine.indexOf(id); expiredMsg = false;
+    if (i>-1) mine.splice(i,1); else { if (mine.length>=6){ $('#sum-b').textContent = t('seat.max'); return; } mine.push(id); }
+    if (mine.length && !holdEnd) holdEnd = Date.now() + 600000;
+    if (!mine.length) holdEnd = 0;
+    draw(); var nb = $('.seat[data-id="'+id+'"]'); if (nb) nb.focus();
+  });
+  $$('[data-h]').forEach(function(b){ b.addEventListener('click', function(){
+    cur = b.dataset.h; mine = []; holdEnd = 0; expiredMsg = false;
+    $$('[data-h]').forEach(function(x){ x.setAttribute('aria-pressed', x===b); });
+    seedTaken(); setView('map'); draw(); timer();
+  });});
+  $('#v-map').addEventListener('click', function(){ setView('map'); });
+  $('#v-pov').addEventListener('click', function(){ if (mine.length) setView('pov'); });
+  function timer(){
+    var el = $('#timer');
+    if (!holdEnd){ el.textContent = '10:00'; el.classList.remove('on'); return; }
+    var left = Math.max(0, Math.round((holdEnd - Date.now())/1000));
+    el.textContent = Math.floor(left/60) + ':' + String(left%60).padStart(2,'0'); el.classList.add('on');
+    if (left===0){ mine = []; holdEnd = 0; expiredMsg = true; draw(); timer(); }
+  }
+  setInterval(timer, 1000);
+
+  /* view from seat (simple perspective render) */
+  function pov(){
+    var c = $('#pov'), wrap = $('#hallwrap'), w = wrap.clientWidth, hgt = wrap.clientHeight, d = Math.min(2, window.devicePixelRatio||1);
+    c.width = w*d; c.height = hgt*d; var g = c.getContext('2d'); g.setTransform(d,0,0,d,0,0);
+    var h = halls[cur], id = mine[mine.length-1], r = L.indexOf(id[0]), col = +id.slice(1);
+    var depth = (r+1)/h.rows, off = (col - (h.cols+1)/2)/h.cols;
+    var bg = g.createLinearGradient(0,0,0,hgt); bg.addColorStop(0,'#05081A'); bg.addColorStop(1,'#0A1024'); g.fillStyle = bg; g.fillRect(0,0,w,hgt);
+    var sw = w * (cur==='imax' ? 1.25 : .95) / (0.7 + depth*1.2), sh = sw * (cur==='imax' ? .52 : .42);
+    var cx = w/2 - off*w*.9, cy = hgt*.38 - (1-depth)*hgt*.08;
+    var skew = off * sw * .12;
+    var glow = g.createRadialGradient(cx,cy,10,cx,cy,sw*.8); glow.addColorStop(0,'rgba(143,167,255,.35)'); glow.addColorStop(1,'rgba(143,167,255,0)');
+    g.fillStyle = glow; g.fillRect(0,0,w,hgt);
+    g.beginPath();
+    g.moveTo(cx - sw/2, cy - sh/2 + skew); g.lineTo(cx + sw/2, cy - sh/2 - skew); g.lineTo(cx + sw/2, cy + sh/2 + skew); g.lineTo(cx - sw/2, cy + sh/2 - skew); g.closePath();
+    var sg = g.createLinearGradient(cx - sw/2, cy, cx + sw/2, cy); sg.addColorStop(0,'#3D6BFF'); sg.addColorStop(.5,'#8FA7FF'); sg.addColorStop(1,'#3D6BFF');
+    g.fillStyle = sg; g.globalAlpha = .9; g.fill(); g.globalAlpha = 1;
+    g.save(); g.clip(); g.fillStyle = 'rgba(10,16,36,.5)'; for (var y = cy - sh/2; y < cy + sh/2; y += 4) g.fillRect(cx - sw, y, sw*2, 1); g.restore();
+    // rows of seat backs in front
+    for (var rr = r-1, k = 0; rr >= 0 && k < 3; rr--, k++){
+      var yy = hgt - 30 - k*28, sc = 1 - k*.18, n = 9, bw = (w/n)*sc*.78;
+      g.fillStyle = 'rgba(26,43,94,' + (.95 - k*.25) + ')';
+      for (var i=-1;i<=n;i++){ var xx = (i + .5)*(w/n) + off*w*.4*sc - ((1-sc)*w*.0); g.beginPath(); g.roundRect ? g.roundRect(xx - bw/2, yy, bw, 60, [12,12,0,0]) : g.rect(xx-bw/2,yy,bw,60); g.fill(); }
+    }
+    g.fillStyle = '#C7D2EA'; g.font = '500 12px "JetBrains Mono", monospace'; g.textAlign = 'left';
+    g.fillText(t('seat.povhint') + ' · ' + id, 14, 22);
+  }
+  window.addEventListener('resize', function(){ if (view==='pov') pov(); });
+  seedTaken(); draw();
+  return {relabel: function(){ draw(); if (view==='pov') pov(); }};
+})();
+
+/* ================= services ================= */
+var openSvc = 0;
+function buildServices(){
+  var box = $('#svc'), html = '';
+  for (var i=0;i<5;i++){
+    var tags = t('svc.'+i+'k').split('|').map(function(s){ return '<span>'+s+'</span>'; }).join('');
+    html += '<div class="srv'+(i===openSvc?' open':'')+'"><button type="button" class="srv-h" id="svh-'+i+'" aria-expanded="'+(i===openSvc)+'" aria-controls="svb-'+i+'">'
+      + '<span class="ix">0'+(i+1)+'</span><span class="nm">'+t('svc.'+i)+'</span><span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span></button>'
+      + '<div class="srv-b" id="svb-'+i+'" role="region" aria-labelledby="svh-'+i+'"><div><div class="srv-in"><p>'+t('svc.'+i+'d')+'</p><div class="tags">'+tags+'</div></div></div></div></div>';
+  }
+  box.innerHTML = html;
+}
+$('#svc').addEventListener('click', function(e){
+  var b = e.target.closest('.srv-h'); if (!b) return;
+  var i = +b.id.split('-')[1]; openSvc = openSvc===i ? -1 : i;
+  $$('.srv').forEach(function(s,j){ s.classList.toggle('open', j===openSvc); s.querySelector('.srv-h').setAttribute('aria-expanded', j===openSvc); });
+});
+
+/* ================= industries ================= */
+var onInd = 0, indMap = [[0,0],[1,1],[2,1],[3,4],[4,2]];
+function buildInds(){
+  var html = '';
+  for (var i=0;i<5;i++){
+    var on = i===onInd;
+    html += '<div class="ind'+(on?' on':'')+'"><button type="button" class="ind-h" id="indh-'+i+'" aria-expanded="'+on+'" aria-controls="indb-'+i+'"><span class="ix">0'+(i+1)+'</span><span class="nm">'+t('i.'+i)+'</span></button>'
+      + '<div class="ind-b" id="indb-'+i+'" role="region" aria-labelledby="indh-'+i+'">'
+      + '<div class="pf"><span class="k">'+t('ind.prob')+'</span><p>'+t('i.'+i+'p')+'</p></div><span class="arrow-line" aria-hidden="true"></span>'
+      + '<div class="pf fixed"><span class="k fix">'+t('ind.fix')+'</span><p>'+t('i.'+i+'f')+'</p></div>'
+      + '<a class="btn primary" href="#contact" data-plan="'+i+'">'+t('ind.cta')+'</a></div></div>';
+  }
+  $('#inds').innerHTML = html;
+}
+function setInd(i, focus){
+  if (i===onInd) return; onInd = i;
+  $$('.ind').forEach(function(el,j){ el.classList.toggle('on', j===i); el.querySelector('.ind-h').setAttribute('aria-expanded', j===i); });
+}
+$('#inds').addEventListener('click', function(e){
+  var h = e.target.closest('.ind-h'); if (h){ setInd(+h.id.split('-')[1]); return; }
+  var p = e.target.closest('[data-plan]'); if (p){ var m = indMap[+p.dataset.plan]; biz = m[0]; need = m[1]; buildBuilder(); writeMsg(); }
+});
+if (finePtr) $('#inds').addEventListener('pointerover', function(e){ var h = e.target.closest('.ind'); if (h){ var i = $$('.ind').indexOf(h); if (i>-1) setInd(i); } });
+
+/* ================= process rail ================= */
+var proc = $('#proc'), steps = $$('.step');
+function rail(){
+  var r = proc.getBoundingClientRect(), vh = window.innerHeight;
+  var p = Math.max(0, Math.min(1, (vh*.75 - r.top) / (r.height + vh*.15)));
+  if (reduce) p = 1;
+  proc.style.setProperty('--p', p.toFixed(3));
+  steps.forEach(function(s,i){ s.classList.toggle('lit', p >= i/(steps.length-1) - .02 || p>.98); });
+}
+window.addEventListener('scroll', function(){ requestAnimationFrame(rail); }, {passive:true}); rail();
+
+/* ================= message builder ================= */
+var need = 0, biz = 0;
+function buildBuilder(){
+  var nh = '', bh = '';
+  for (var i=0;i<5;i++) nh += '<label class="opt"><input type="radio" name="need" id="need-'+i+'" value="'+i+'"'+(i===need?' checked':'')+'><span>'+t('n.'+i)+'</span></label>';
+  for (var j=0;j<6;j++) bh += '<label class="opt"><input type="radio" name="biz" id="biz-'+j+'" value="'+j+'"'+(j===biz?' checked':'')+'><span>'+t('b.'+j)+'</span></label>';
+  $('#need').innerHTML = nh; $('#biz').innerHTML = bh; writeMsg(true);
+}
+function message(){
+  var name = $('#bname').value.trim();
+  if (lang==='ar') return 'أهلاً Incog، عندي ' + t('ba.'+biz) + (name ? ' اسمه ' + name : '') + ' ومحتاج ' + t('na.'+need) + '. ممكن نعمل مكالمة قصيرة؟';
+  return 'Hi Incog, I run ' + t('ba.'+biz) + (name ? ' called ' + name : '') + ' and I need ' + t('na.'+need) + '. Can we set up a short call?';
+}
+var typeTimer = null;
+function writeMsg(instant){
+  var box = $('#msg'), full = message(); clearInterval(typeTimer);
+  if (instant || reduce){ box.innerHTML = ''; box.textContent = full; return; }
+  var i = 0, prev = box.textContent, common = 0;
+  while (common < prev.length && prev[common]===full[common]) common++;
+  i = common;
+  typeTimer = setInterval(function(){
+    i += 2; box.textContent = full.slice(0,i);
+    var c = document.createElement('span'); c.className = 'caret'; box.appendChild(c);
+    if (i >= full.length){ clearInterval(typeTimer); box.textContent = full; }
+  }, 16);
+}
+$('#builder').addEventListener('change', function(e){
+  if (e.target.name==='need') need = +e.target.value;
+  if (e.target.name==='biz') biz = +e.target.value;
+  writeMsg();
+});
+$('#bname').addEventListener('input', function(){ writeMsg(true); });
+function copy(text, selNode, out){
+  function fallback(){ var r = document.createRange(); r.selectNodeContents(selNode); var s = getSelection(); s.removeAllRanges(); s.addRange(r); out.textContent = t('ct.sel'); }
+  try{ navigator.clipboard.writeText(text).then(function(){ out.textContent = t('ct.copied') + ' ✓'; setTimeout(function(){ out.textContent=''; }, 2500); }, fallback); }catch(e){ fallback(); }
+}
+$('#builder').addEventListener('submit', function(e){ e.preventDefault(); copy(message(), $('#msg'), $('#toast')); });
+$('#copy-mail').addEventListener('click', function(){ copy($('#email').textContent.trim(), $('#email'), $('#toast')); });
+
+/* ================= magnetic buttons ================= */
+if (finePtr && !reduce) $$('.mag').forEach(function(b){
+  b.addEventListener('pointermove', function(e){ var r = b.getBoundingClientRect(); b.style.transform = 'translate(' + ((e.clientX - r.left - r.width/2)*.18).toFixed(1) + 'px,' + ((e.clientY - r.top - r.height/2)*.28).toFixed(1) + 'px)'; });
+  b.addEventListener('pointerleave', function(){ b.style.transform = ''; });
+});
+
+applyLang(); scramble(); spy();
+})();
+</script>
+
+</body>
+</html>
